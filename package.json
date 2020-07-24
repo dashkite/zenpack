@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Combinators for configuring and running Webpack",
   "main": "build/src/index.js",
+  "files": [ "build/src" ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
