@@ -1,0 +1,26 @@
+{
+  "name": "@dashkite/zenpack",
+  "version": "0.0.0",
+  "description": "Combinators for configuring and running Webpack",
+  "main": "build/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashkite/zenpack.git"
+  },
+  "keywords": [],
+  "author": "Dan Yoder",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/dashkite/zenpack/issues"
+  },
+  "homepage": "https://github.com/dashkite/zenpack#readme",
+  "devDependencies": {
+    "@dashkite/brick": "^0.1.0",
+    "@dashkite/genie": "0.0.1",
+    "@pandastrike/garden": "^8.0.0-alpha.1",
+    "webpack": "^4.43.0"
+  }
+}

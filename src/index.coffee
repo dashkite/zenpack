@@ -1,0 +1,68 @@
+import Path from "path"
+import webpack from "webpack"
+import {curry, tee, rtee} from "@pandastrike/garden"
+
+config = (source, build) ->
+  ->
+    target: "web"
+    entry: Path.join source, "index.coffee"
+    resolve:
+      mainFiles: [ "index" ]
+      mainFields: [ "browser", "module", "main" ]
+      extensions: [ ".js" ]
+      modules: [ "node_modules" ]
+    output:
+      path: build
+      filename: "index.min.js"
+
+mode = curry rtee (name, config) -> config.mode = name
+
+target = curry rtee (name, config) -> config.target = name
+
+# TODO update output as well? or just use Webpack template?
+entry = curry rtee (path, config) -> config.entry = path
+
+rule = curry rtee (description, config) ->
+  config.module ?= {}
+  config.module.rules ?= []
+  config.module.rules.push description
+
+extension = curry rtee (name, config) ->
+  config.resolve ?= {}
+  config.resolve.extensions ?= []
+  config.resolve.extensions.unshift name
+
+sourcemaps = tee (config) -> config.devtool = "inline-source-map"
+
+mainField = curry rtee (name, config) ->
+  config.resolve ?= {}
+  config.resolve.mainFields ?= []
+  config.resolve.mainFields.unshift name
+
+alias = curry rtee (dictionary, config) ->
+  config.resolve.alias ?= {}
+  for name, path of dictionary
+    config.resolve.alias[name] = path
+
+run = (config) ->
+  new Promise (resolve, reject) ->
+    webpack config
+    .run (error, result) ->
+      console.error result.toString colors: true
+      unless error? || result.hasErrors()
+        resolve()
+      else
+        reject error ? new Error "bundler: cryptic failure"
+
+export {
+  config
+  mode
+  target
+  entry
+  rule
+  extension
+  sourcemaps
+  mainField
+  alias
+  run
+}
