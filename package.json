@@ -20,10 +20,12 @@
     "url": "https://github.com/dashkite/zenpack/issues"
   },
   "homepage": "https://github.com/dashkite/zenpack#readme",
-  "devDependencies": {
-    "@dashkite/brick": "^0.1.0",
-    "@dashkite/genie": "0.0.1",
+  "dependencies": {
     "@pandastrike/garden": "^8.0.0-alpha.1",
     "webpack": "^4.43.0"
+  },
+  "devDependencies": {
+    "@dashkite/brick": "^0.1.0",
+    "@dashkite/genie": "0.0.1"
   }
 }
