@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/zenpack",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Combinators for configuring and running Webpack",
   "main": "build/src/index.js",
   "files": [
