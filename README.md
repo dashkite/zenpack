@@ -62,9 +62,25 @@ Set the mode for the configuration, usually _development_ or _production_.
 
 Set the Webpack build target, ex: _web_.
 
+#### node *value*
+
+Set the `node` configuration option.
+
+#### nodeEnv *value*
+
+Explicitly set the NODE_ENV environment variable.
+
 #### entry *path*
 
 Set the Webpack entry point.
+
+#### path *path*
+
+Set the Webpack output path.
+
+#### libraryTarget *target*
+
+Set the Webpack output library target, ex: `umd`.
 
 #### rule *description*
 

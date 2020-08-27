@@ -5,7 +5,7 @@ import {curry, tee, rtee} from "@pandastrike/garden"
 config = (source, build) ->
   ->
     target: "web"
-    entry: Path.join source, "index.coffee"
+    entry: application: Path.join source, "index.coffee"
     resolve:
       mainFiles: [ "index" ]
       mainFields: [ "browser", "module", "main" ]
@@ -13,14 +13,25 @@ config = (source, build) ->
       modules: [ "node_modules" ]
     output:
       path: build
-      filename: "index.min.js"
+      filename: "[name].js"
 
 mode = curry rtee (name, config) -> config.mode = name
 
 target = curry rtee (name, config) -> config.target = name
 
+node = curry rtee (value, config) -> config.node = value
+
+nodeEnv = curry rtee (value, config) ->
+  config.optimization ?= {}
+  config.optimization.nodeEnv = value
+
 # TODO update output as well? or just use Webpack template?
 entry = curry rtee (path, config) -> config.entry = path
+
+path = curry rtee (path, config) -> config.output.path = path
+
+libraryTarget = curry rtee (value, config) ->
+  config.output.libraryTarget = value
 
 rule = curry rtee (description, config) ->
   config.module ?= {}
@@ -49,16 +60,17 @@ run = (config) ->
     webpack config
     .run (error, result) ->
       console.error result.toString colors: true
-      unless error? || result.hasErrors()
-        resolve()
-      else
-        reject error ? new Error "bundler: cryptic failure"
+      if error? then reject error else resolve result
 
 export {
   config
   mode
   target
+  node
+  nodeEnv
   entry
+  path
+  libraryTarget
   rule
   extension
   sourcemaps
