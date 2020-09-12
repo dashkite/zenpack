@@ -22,6 +22,7 @@
   "homepage": "https://github.com/dashkite/zenpack#readme",
   "dependencies": {
     "@pandastrike/garden": "^8.0.0-alpha.1",
+    "panda-quill": "^5.0.0",
     "webpack": "^5.0.0-beta.25"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import Path from "path"
 import webpack from "webpack"
 import {curry, tee, rtee} from "@pandastrike/garden"
+import {write} from "panda-quill"
 
 config = (source, build) ->
   ->
@@ -62,6 +63,11 @@ run = (config) ->
       console.error result.toString colors: true
       if error? then reject error else resolve result
 
+stats = (result) ->
+  console.error "Writing stats data to webpack-stats.json..."
+  await write "webpack-stats.json",
+    JSON.stringify result.toJson(), null, 2
+
 export {
   config
   mode
@@ -77,4 +83,5 @@ export {
   mainField
   alias
   run
+  stats
 }
