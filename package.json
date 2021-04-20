@@ -7,7 +7,7 @@
     "build/src"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "genie test"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/dashkite/zenpack#readme",
   "dependencies": {
-    "@pandastrike/garden": "^8.0.0-alpha.1",
-    "webpack": "5.0.0-beta.29"
+    "@dashkite/masonry": "^0.7.0",
+    "@pandastrike/garden": "^8.0.1",
+    "webpack": "^5.34.0"
   },
   "devDependencies": {
-    "@dashkite/brick": "^0.1.0",
-    "@dashkite/genie": "0.0.1"
+    "@dashkite/genie": "0.1.0"
   }
 }

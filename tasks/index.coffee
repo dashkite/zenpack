@@ -1,23 +1,14 @@
 import * as t from "@dashkite/genie"
-import * as b from "@dashkite/brick"
+import * as b from "@dashkite/masonry"
+import {coffee} from "@dashkite/masonry/coffee"
 import * as q from "panda-quill"
-import coffee from "coffeescript"
 
 t.define "clean", -> q.rmr "build"
 
 t.define "build", "clean", b.start [
   b.glob [ "{src,test}/**/*.coffee" ], "."
   b.read
-  b.tr ({path}, code) ->
-    coffee.compile code,
-      bare: true
-      inlineMap: true
-      filename: path
-      transpile:
-        presets: [[
-          "@babel/preset-env"
-          targets: node: "current"
-        ]]
+  b.tr coffee target: "node"
   b.extension ".js"
   b.write "build"
 ]
